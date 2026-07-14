@@ -1,14 +1,9 @@
--- =====================================================================
--- MOVIE TICKET BOOKING SYSTEM - SAMPLE DATA
--- Run after ddl.sql
--- =====================================================================
 
--- ---------- genres ----------
 INSERT INTO genres (genre_name) VALUES
 ('Action'), ('Drama'), ('Comedy'), ('Thriller'), ('Sci-Fi'),
 ('Romance'), ('Horror'), ('Animation'), ('Crime'), ('Fantasy');
 
--- ---------- movies ----------
+
 INSERT INTO movies (title, release_date, duration_minutes, language, certification, synopsis) VALUES
 ('Edge of Tomorrow City',   '2025-01-10', 142, 'English', 'UA', 'A soldier relives a battle against alien invaders.'),
 ('The Silent Ledger',       '2025-02-14', 128, 'English', 'A',  'A forensic accountant uncovers a banking conspiracy.'),
@@ -26,7 +21,7 @@ INSERT INTO movies (title, release_date, duration_minutes, language, certificati
 ('Beneath the Banyan',      '2025-08-22', 108, 'Hindi',   'U',  'A village elder recounts a forgotten legend.'),
 ('Velocity',                '2025-09-05', 120, 'English', 'UA', 'Street racers compete for a hidden fortune.');
 
--- ---------- movie_genres ----------
+
 INSERT INTO movie_genres (movie_id, genre_id) VALUES
 (1,1),(1,5),
 (2,2),(2,9),
@@ -44,7 +39,7 @@ INSERT INTO movie_genres (movie_id, genre_id) VALUES
 (14,2),(14,10),
 (15,1),(15,4);
 
--- ---------- theatres ----------
+
 INSERT INTO theatres (theatre_name, city, address, phone) VALUES
 ('Galaxy Cineplex',   'Hyderabad', 'Plot 12, Hitech City Road',       '9100011111'),
 ('Silver Screen Mall', 'Hyderabad', '4th Floor, Banjara Central',      '9100022222'),
@@ -52,7 +47,7 @@ INSERT INTO theatres (theatre_name, city, address, phone) VALUES
 ('Metro Cinemas',      'Mumbai',    'Andheri West, Link Road',         '9100044444'),
 ('Regal Picture House','Chennai',   'Anna Salai, T. Nagar',            '9100055555');
 
--- ---------- screens ----------
+
 INSERT INTO screens (theatre_id, screen_name, total_seats, screen_type) VALUES
 (1, 'Screen 1', 48, 'IMAX'),
 (1, 'Screen 2', 48, 'Standard'),
@@ -65,8 +60,7 @@ INSERT INTO screens (theatre_id, screen_name, total_seats, screen_type) VALUES
 (5, 'Screen 1', 48, 'Standard'),
 (5, 'Screen 2', 48, 'IMAX');
 
--- ---------- seats ----------
--- 6 rows (A-F) x 8 seats per screen; rows A-B Recliner, C-D Premium, E-F Standard
+
 INSERT INTO seats (screen_id, seat_row, seat_number, seat_type)
 SELECT s.screen_id, r.row_letter, n.seat_no,
        CASE WHEN r.row_letter IN ('A','B') THEN 'Recliner'
@@ -76,7 +70,7 @@ FROM screens s
 CROSS JOIN (VALUES ('A'),('B'),('C'),('D'),('E'),('F')) AS r(row_letter)
 CROSS JOIN generate_series(1,8) AS n(seat_no);
 
--- ---------- customers ----------
+
 INSERT INTO customers (full_name, email, phone, password_hash, date_of_birth) VALUES
 ('Aarav Sharma',    'aarav.sharma@example.com',    '9000000001', 'hash_a1b2c3', '1998-04-12'),
 ('Diya Patel',      'diya.patel@example.com',      '9000000002', 'hash_b2c3d4', '1995-09-23'),
@@ -94,7 +88,7 @@ INSERT INTO customers (full_name, email, phone, password_hash, date_of_birth) VA
 ('Priya Desai',     'priya.desai@example.com',     '9000000014', 'hash_b4c5d6', '1999-09-04'),
 ('Karan Chatterjee', 'karan.chatterjee@example.com','9000000015', 'hash_c5d6e7', '1995-03-29');
 
--- ---------- shows ----------
+
 INSERT INTO shows (movie_id, screen_id, show_date, start_time, end_time, base_price, premium_multiplier, recliner_multiplier) VALUES
 (1, 1,  '2026-07-15', '10:00', '12:30', 220.00, 1.50, 2.00),
 (1, 3,  '2026-07-15', '18:00', '20:30', 250.00, 1.50, 2.00),
@@ -115,7 +109,7 @@ INSERT INTO shows (movie_id, screen_id, show_date, start_time, end_time, base_pr
 (1, 2,  '2026-07-20', '10:30', '13:00', 210.00, 1.50, 2.00),
 (4, 6,  '2026-07-20', '17:30', '19:30', 240.00, 1.50, 2.00);
 
--- ---------- bookings ----------
+
 INSERT INTO bookings (customer_id, show_id, booking_time, booking_status, total_amount) VALUES
 (1,  1, '2026-07-10 09:15', 'CONFIRMED', 440.00),
 (2,  1, '2026-07-10 10:02', 'CONFIRMED', 330.00),
@@ -138,8 +132,7 @@ INSERT INTO bookings (customer_id, show_id, booking_time, booking_status, total_
 (4, 18, '2026-07-15 12:25', 'CONFIRMED', 360.00),
 (5, 1,  '2026-07-15 13:00', 'CONFIRMED', 220.00);
 
--- ---------- tickets ----------
--- seat_ids are dependent on generated seats; ranges below map to screen_id 1 (seats 1-48) and screen_id 3 (seats 97-144)
+
 INSERT INTO tickets (booking_id, seat_id, show_id, price_paid) VALUES
 (1, 1,  1, 220.00), (1, 2,  1, 220.00),
 (2, 3,  1, 220.00), (2, 4,  1, 220.00), (2, 5,  1, 220.00),
@@ -162,7 +155,7 @@ INSERT INTO tickets (booking_id, seat_id, show_id, price_paid) VALUES
 (19, 241,18,240.00), (19,242,18,120.00),
 (20, 5, 1, 220.00);
 
--- ---------- payments ----------
+
 INSERT INTO payments (booking_id, amount, payment_method, payment_status, transaction_ref, payment_time) VALUES
 (1,  440.00, 'UPI',        'SUCCESS', 'TXN100001', '2026-07-10 09:16'),
 (2,  330.00, 'CARD',       'SUCCESS', 'TXN100002', '2026-07-10 10:03'),
@@ -185,7 +178,7 @@ INSERT INTO payments (booking_id, amount, payment_method, payment_status, transa
 (19, 360.00, 'CARD',       'PENDING', 'TXN100019', '2026-07-15 12:26'),
 (20, 220.00, 'UPI',        'SUCCESS', 'TXN100020', '2026-07-15 13:01');
 
--- ---------- reviews ----------
+
 INSERT INTO reviews (customer_id, movie_id, rating, review_text, review_date) VALUES
 (1,  1, 5, 'Stunning visuals and a gripping storyline.',       '2026-07-16 08:00'),
 (2,  1, 4, 'Great action but slightly long.',                  '2026-07-16 09:15'),
