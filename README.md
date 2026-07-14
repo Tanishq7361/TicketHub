@@ -65,7 +65,7 @@ psql -U postgres -d TicketHub -f queries.sql
 
 ## ER Diagram
 
-![ER Diagram](docs/ERD.svg)
+![ER Diagram](docs/ERD.png)
 
 ## Author
 
