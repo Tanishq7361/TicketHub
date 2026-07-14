@@ -1,14 +1,14 @@
-# 🎬 CineBook — Movie Ticket Booking System (PostgreSQL Database Design)
+# 🎬 TicketHub — Movie Ticket Booking System (PostgreSQL Database Design)
 
 A production-inspired relational database for a multi-theatre movie ticket booking platform, designed as a DBMS course project. Focuses purely on schema design, normalization, and SQL — no application layer.
 
 ## Overview
 
-CineBook models the full data lifecycle of a ticketing platform: theatres and screens, seat inventory, show scheduling, customer bookings, seat-level ticketing, payments, and reviews. The schema is normalized to **BCNF** and enforces referential integrity through primary/foreign keys, composite uniqueness constraints, and check constraints — with zero business logic pushed into the database (no procedures, triggers, or views).
+TicketHub models the full data lifecycle of a ticketing platform: theatres and screens, seat inventory, show scheduling, customer bookings, seat-level ticketing, payments, and reviews. The schema is normalized to **BCNF** and enforces referential integrity through primary/foreign keys, composite uniqueness constraints, and check constraints — with zero business logic pushed into the database (no procedures, triggers, or views).
 
 ## Tech Stack
 
-- **Database:** PostgreSQL 14+
+- **Database:** PostgreSQL
 - **Scope:** DDL, DML (sample data), and analytical SQL only
 
 ## Schema (12 Tables)
@@ -43,7 +43,7 @@ CineBook models the full data lifecycle of a ticketing platform: theatres and sc
 .
 ├── ddl.sql                            # Schema: tables, keys, constraints
 ├── insert_data.sql                    # Realistic sample data (10-20+ rows/table)
-├── queries.sql                        # 20 queries: 10 easy / 5 medium / 5 hard
+├── queries.sql                        # 20 sql queries
 ├── schema.dbml                        # dbdiagram.io-ready ER schema
 └── er_diagram_and_normalization.md    # ER diagram (Mermaid) + BCNF proof + design rationale
 ```
@@ -51,9 +51,9 @@ CineBook models the full data lifecycle of a ticketing platform: theatres and sc
 ## Setup
 
 ```bash
-psql -U postgres -d cinebook -f ddl.sql
-psql -U postgres -d cinebook -f insert_data.sql
-psql -U postgres -d cinebook -f queries.sql
+psql -U postgres -d TicketHub -f ddl.sql
+psql -U postgres -d TicketHub -f insert_data.sql
+psql -U postgres -d TicketHub -f queries.sql
 ```
 
 ## Query Highlights
@@ -65,7 +65,7 @@ psql -U postgres -d cinebook -f queries.sql
 
 ## ER Diagram
 
-See [`er_diagram_and_normalization.md`](./er_diagram_and_normalization.md) for the Mermaid diagram, or import [`schema.dbml`](./schema.dbml) directly into [dbdiagram.io](https://dbdiagram.io).
+![ER Diagram](docs/ERD.svg)
 
 ## Author
 
