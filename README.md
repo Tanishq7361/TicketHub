@@ -173,8 +173,6 @@ erDiagram
     }
 ```
 
-![ER Diagram](docs/ERD.png)
-
 ## Normalization Walkthrough
 
 **1NF** — Every table stores atomic, single-valued attributes only (e.g., a customer's phone is one value, not a list; no repeating groups). Multi-valued associations — a movie having several genres, a customer reviewing several movies — are factored out into `movie_genres` and `reviews` rather than stored as comma-separated columns.
